@@ -70,7 +70,7 @@ def adding(csv,new_data):
 
 def register():
     # I.S. admin me-register-kan user baru
-    # F.S. mengembalikan data user baru berupa list
+    # F.S. memasukkan data user baru ke csv
     terdaftar = False
     nama = input("Masukkan nama: ")
     uname = input("Masukkan username: ")
