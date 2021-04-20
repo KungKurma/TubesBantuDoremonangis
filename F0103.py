@@ -111,15 +111,15 @@ def login():
 def carirarity():
     # I.S. pengguna memasukkan rarity dari suatu gadget
     # F.S. menampilkan semua gadget sesuai rarity yang di-input
-    rarity = input("Masukkan rarity: ")
-    print("\nHasil pencarian:\n")
+   rarity = input("Masukkan rarity: ")
+    print('\n'+'='*10)
+    print("Hasil pencarian:")
     for i in db_gadget:
-        print('='*10)
         if i[4] == rarity:
-            print("Nama\t\t\t:",i[1])
+            print("\nNama\t\t\t:",i[1])
             print("Deskripsi\t\t:",i[2])
             print("Jumlah\t\t\t:",int(i[3]))
-            print("Rarity\t\t\t:",i[4])
+            print("Rarity\t\t\t:",i[4],)
             print("Tahun ditemukan\t:",i[5])
     print('='*10)
 
