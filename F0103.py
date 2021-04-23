@@ -1,8 +1,8 @@
 # Modul berisi spesifikasi dan realisasi F01, F02, dan F03
 
 # KAMUS
-# db_user = matriks user.csv
-# db_gadget = matriks gadget.csv
+# db_user = variabel global dari load data / matriks user.csv
+# db_gadget = variabel global dari load data / matriks gadget.csv
 # register() -> F01
 # login() -> F02
 # carirarity() -> F03
@@ -68,7 +68,7 @@ def adding(csv,new_data):
         for i in new_data:
             file.write(";".join(i)+"\n")
 
-def register():
+def register(db_user):
     # I.S. admin me-register-kan user baru
     # F.S. memasukkan data user baru ke csv
     terdaftar = False
@@ -88,7 +88,7 @@ def register():
         db_user.append(new_user)
         adding('user.csv',convert(db_user,Str=True))
 
-def login():
+def login(db_user):
     # I.S. input uname dan password
     # F.S. mengembalikan list yang mengandung logged_in
     logged_in = False
@@ -108,7 +108,7 @@ def login():
         return [logged_in]
         # user = [logged_in,id,uname,nama,alamat,password,role]
  
-def carirarity():
+def carirarity(db_gadget):
     # I.S. pengguna memasukkan rarity dari suatu gadget
     # F.S. menampilkan semua gadget sesuai rarity yang di-input
     rarity = input("Masukkan rarity: ")
@@ -141,5 +141,5 @@ def Help():
     print("save - menyimpan perubahan data")
     print("exit - keluar dari program")
 
-db_user = matriks('user.csv')
-db_gadget = matriks('gadget.csv')
+# db_user = matriks('user.csv') -> buat jaga-jaga
+# db_gadget = matriks('gadget.csv') -> buat jaga-jaga
