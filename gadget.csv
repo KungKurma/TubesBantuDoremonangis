@@ -1,8 +1,9 @@
-id;nama;deskripsi;jumlah;rarity
-G1;Parametric Transformer;Sering dilupakan;10;A
-G2;Iphone 20;Layarnya 40 inchi;2;B
-G3;Swrirly Chair;"You spin me right round, baby, right round like a record baby, right round, rpund, round.";3;C
-G4;Stand Arrow;*insert any jojo meme*;3;S
-G5;Handphone Nokia;Benda terkuat di dunia;100;B
-
+id;nama;deskripsi;jumlah;rarity;tahun_ditemukan
+G1;Parametric Transformer;Sering dilupakan;10;A;2020
+G2;Iphone 20;Layarnya 40 inchi;2;B;2054
+G3;Swrirly Chair;"You spin me right round, baby, right round like a record baby, right round, rpund, round.";3;C;1776
+G4;Stand Arrow;*insert any jojo meme*;3;S;1987
+G5;Handphone Nokia;Benda terkuat di dunia;100;B;2005
+G6;Go Go Gadget: Oil Slick;Prone to slip ups and combustion;2;C;1989
+G6;SUPERSEMAR;"Lah, kok di sini?";1;S;1996
 
