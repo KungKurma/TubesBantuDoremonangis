@@ -6,6 +6,7 @@
 
 
 # KAMUS 
+# database : list of list
 # tahun : integer
 # kategori : string
 # found : boolean
