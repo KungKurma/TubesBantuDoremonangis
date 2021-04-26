@@ -10,6 +10,7 @@
 # databaseC : list of list
 
 # ID : string
+# isGadget : boolean
 # Nama : string
 # Deskripsi : string
 # Jumlah : string
@@ -17,25 +18,63 @@
 # tahun : integer
 
 
-
 # FUNGSI DAN PROSEDUR
 
-def masukanInteger(masuk):
-# Prosedur input jumlah beserta validasi
+def searchDatabase(Id, database):
+# Fungsi yang memeriksa apakah sebuah Id ada di dalam database
+
+# KAMUS LOKAL
+# found : boolean
+
+# ALGORITMA
+    found = False
+    for i in database:
+        if i == database[0]:
+            found = True
+            break
+    return found
+
+
+def isInit(x):
+# Fungsi yang memeriksa apakah input integer
 
 # KAMUS LOKAL
 
 # ALGORITMA
-    pass
+    return ( type(x) == type(int()) )
 
 
 # PROGRAM UTAMA
 def tambahItem(databaseG, databaseC):
-    # Meminta input user
-    pass
 
-"""
-Nanti ini hapus
+    # Input ID
+    ID = input("Masukan ID: ")
+    
+    # Pengecekan ID valid
+    if ( (ID[0] != "G") and (ID[0] != "C") ) or not( ID[1:].isdigit() ) :
+        print("Gagal menambahkan item karena ID sudah ada.")
+
+    else:
+
+        if (ID[0] == "G"):
+            isGadget = True
+        else:
+            isGadget = False
+
+        if isGadget:
+            if searchDatabase(ID, databaseG):
+                print("Gagal menambahkan item karena ID sudah ada")
+            
+            else:
+                Nama = input("Masukan Nama: ")
+
+                Deskripsi = input("Masukan Deskripsi: ")
+
+                
+    
+
+
+
 
 dummyList = [ ["G1","Parametric Transformer","Sering dilupakan",10,'A',2020],
               ["G2","Iphone 20","Layarnya 40 inchi",2,'B',2054],
@@ -43,6 +82,5 @@ dummyList = [ ["G1","Parametric Transformer","Sering dilupakan",10,'A',2020],
               ["G4","Stand Arrow","*insert any jojo meme*",3,'S',1987],
               ["G5","Handphone Nokia","Benda terkuat di dunia",100,'B',2005],
               ["G6","Go Go Gadget: Oil Slick","Prone to slip ups and combustion",2,'C',1989],
-              ["G6","SUPERSEMAR","Lah, kok di sini?",1,'S',1996] ]
+              ["G7","SUPERSEMAR","Lah, kok di sini?",1,'S',1996] ]
 
-"""
