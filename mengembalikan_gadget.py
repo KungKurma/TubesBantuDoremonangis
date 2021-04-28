@@ -65,10 +65,8 @@ def data_dan_tampilan_awal(id_user):
             nomor += 1
     return data_pinjam
 
-def mengembalikan_gadget(full_data_borrow, full_data_gadget, full_data_return):
+def mengembalikan_gadget(id_user, full_data_borrow, full_data_gadget, full_data_return):
     print(">>> kembalikan")
-    #MASUKKAN ID USER
-    id_user = input('Masukkan id user: ')
     data_pinjam = data_dan_tampilan_awal(id_user)
     nomor_pinjam = masukan_nomor_pinjam(data_pinjam)
     tgl_kembali = input_tanggal_valid()
