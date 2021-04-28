@@ -46,7 +46,8 @@ def save(files,db):
 	counter = 0
 	for file in files:
 		with open(f"{args.folder}\\{file}",'w') as f:
-			f.write(";".join(db[counter]+"\n"))
+			for i in db[counter]:
+				f.write(";".join(i)+"\n")
 		counter += 1
 	print('\nLoading',end='')
 	for i in range(3):
