@@ -55,7 +55,6 @@ def save(files,db):
 		print('.',end='')
 	print('\nDATA SAVED!\n')
 
-# on CMD : main.py KantongAjaib -> args.folder = 'KantongAjaib'
 parser = argparse.ArgumentParser(description='nama folder')
 parser.add_argument('folder', type=str, help='definisikan folder')
 args = parser.parse_args()
