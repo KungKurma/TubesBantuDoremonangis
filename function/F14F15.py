@@ -1,0 +1,64 @@
+# F14 : load data
+# F15 : save data
+
+import time
+import argparse
+import os
+
+def matriks(csv):
+    # I.S. mengimport file csv
+    # F.S. file csv dijadikan matriks
+    with open(csv,'r') as file:
+        line = [clean_line.replace('\n','') for clean_line in file.readlines()]
+        array = []
+        for i in range(len(line)):
+            tempArr = []
+            counter = 0
+            string = line[i]
+            length = len(line[i])
+            for j in range(length):
+                if j == length-1:
+                    tempArr.append(string[counter:(j+1)])
+                elif string[j] == ';':
+                    tempArr.append(string[counter:j])
+                    counter = j + 1
+            array.append(tempArr)
+    return array
+
+def get_db():
+	# F.S. mengembalikan list berisi matriks tiap csv
+	list_db = []
+	for (root,dirs,files) in os.walk(args.folder):
+		for i in files:
+			list_db.append(matriks(i))
+	return list_db
+
+def get_files():
+	# F.S. mengembalikan nama file (csv) dalam bentuk list
+	for (root,dirs,files) in os.walk(args.folder):
+		return files
+
+def save(files,db):
+	# I.S. diberikan matriks tiap database dalam list
+	# F.S. setiap data disimpan dalam csv yang sesuai
+	# list_db : matriks db dalam list
+	# db : database / nama file (list)
+	counter = 0
+	for file in files:
+		with open(file,'w') as f:
+			f.write(";".join(db[counter]+"\n"))
+		counter += 1
+	print('\nLoading',end='')
+	for i in range(3):
+		time.sleep(1)
+		print('.',end='')
+	print('\nDATA SAVED!\n')
+
+parser = argparse.ArgumentParser(description='nama folder')
+parser.add_argument('folder', type=str, help='definisikan folder')
+args = parser.parse_args()
+
+if args.folder == "KantongAjaib":
+	print("Selamat datang di Kantong Ajaib!")
+else:
+	print("Error: Folder not found.")
