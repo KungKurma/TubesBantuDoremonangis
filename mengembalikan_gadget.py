@@ -1,42 +1,9 @@
-def csv_to_line(nama_csv):
-    f = open(nama_csv, "r")
-    raw_lines = f.readlines()
-    f.close()
-    lines = [raw_line.replace("\n", "") for raw_line in raw_lines]
-    return lines
-
-def line_to_data(line, column): #Seperti fungsi split
-    idx = 0
-    raw_line = ["" for i in range(column)]
-    for i in line:
-        if i != ";":
-            raw_line[idx] += i
-        else:
-            idx += 1
-            continue
-        line = raw_line
-    return line
-
-def convert_data_to_real_value(array_data, idx): #mengubah data kuantitatif menjadi type int
-    arr_cpy = array_data
-    for i in range(6):
-        if (i == idx) :
-            arr_cpy[i] = int(arr_cpy[i])
-    return arr_cpy
-
-def line_to_real_value(lines, column, idx):
-    full_data = []
-    for line in lines:
-        data = line_to_data(line, column)
-        real_data = convert_data_to_real_value(data, idx)
-        full_data.append(real_data)
-    return full_data
-
 def mencari_data_gadget(id):
-    for i in range(len(full_data_gadget)):
-        if (id == full_data_gadget[i][0]):
-            data = full_data_gadget[i]
-            return data
+    data = []
+    for i in full_data_gadget:
+        if (id == i[0]):
+            data.append(i[1])
+            return data #[nama barang]
 
 def input_tanggal_valid():
     tgl_tidak_valid = True
@@ -75,83 +42,45 @@ def input_tanggal_valid():
             print("Tanggal tidak valid. Ulangi!")
     return tgl_kembali
 
-def masukan_nomor_pinjam():
+def masukan_nomor_pinjam(data_pinjam):
     input_nomor_tidak_valid = True
     while(input_nomor_tidak_valid):
         nomor_pinjam = int(input("Masukkan nomor peminjaman: "))
-        if (0 < nomor_pinjam < nomor):
+        if (0 < nomor_pinjam < len(data_pinjam)+1):
             input_nomor_tidak_valid = False
         else:
             print("Input tidak valid. Ulangi!")
     return nomor_pinjam
 
-def add_data_return_csv():
-    lines_return = csv_to_line("gadget_return_history.csv")
-    new_data = ("R" + str(len(lines_return)) + ";"+ id_pinjam[nomor_pinjam-1]  + ";" + tgl_kembali)
-    lines_return.append(new_data)
-    new_string = ""
-    for arr in lines_return:
-        new_string += arr + "\n"
-    g = open("gadget_return_history.csv", "w")
-    g.write(new_string)
-    g.close()
+def data_dan_tampilan_awal(id_user):
+    nomor = 1
+    data_pinjam = []
+    for i in range(len(full_data_borrow)):
+        if full_data_borrow[i][5] == "False" and id_user == full_data_borrow[i][1]:
+            gadget = mencari_data_gadget(full_data_borrow[i][2])
+            gadget.append(full_data_borrow[i][4])
+            gadget.append(full_data_borrow[i][0])
+            data_pinjam.append(gadget)
+            print(str(nomor) + ". " + gadget[0])
+            nomor += 1
+    return data_pinjam
 
-def ubah_csv_gadget():
-    string_data = header_gadget +  "\n"
-    for arr_data in full_data_gadget:
-        arr_data_all_string = [str(var) for var in arr_data]
-        string_data += ";".join(arr_data_all_string)
-        string_data += "\n"
-    
-    f = open("gadget.csv", "w")
-    f.write(string_data)
-    f.close
+def mengembalikan_gadget(full_data_borrow, full_data_gadget, full_data_return):
+    print(">>> kembalikan")
+    #MASUKKAN ID USER
+    id_user = input('Masukkan id user: ')
+    data_pinjam = data_dan_tampilan_awal(id_user)
+    nomor_pinjam = masukan_nomor_pinjam(data_pinjam)
+    tgl_kembali = input_tanggal_valid()
 
-def is_returned(): #mengisi True jika barang sudah dikembalikan
-    for arr in full_data_borrow:
-        if arr[0] == id_pinjam[nomor_pinjam-1]:
-            arr[5] = "True"
-    string_data = header_borrow +  "\n"
-    for arr_data in full_data_borrow:
-        arr_data_all_string = [str(var) for var in arr_data]
-        string_data += ";".join(arr_data_all_string)
-        string_data += "\n"
-        
-    f = open("gadget_borrow_history.csv", "w")
-    f.write(string_data)
-    f.close
+    print("\n" + "Item " + data_pinjam[nomor_pinjam-1][0] + " (x" + data_pinjam[nomor_pinjam-1][1] + ") telah dikembalikan.")
 
-print(">>> kembalikan")
-lines_borrow = csv_to_line("gadget_borrow_history.csv")
-header_borrow = lines_borrow.pop(0)
-full_data_borrow = line_to_real_value(lines_borrow, 6, 4)
+    for i in range(len(full_data_gadget)):
+        if full_data_gadget[i][1] == data_pinjam[nomor_pinjam-1][0]:
+            full_data_gadget[i][3] += int(data_pinjam[nomor_pinjam-1][1])
+    for i in full_data_borrow:
+        if i[0] == data_pinjam[nomor_pinjam-1][2]:
+            i[5] = "True"
 
-lines_gadget = csv_to_line("gadget.csv")
-header_gadget = lines_gadget.pop(0)
-full_data_gadget = line_to_real_value(lines_gadget, 6, 3)
-
-nomor = 1
-data_pinjam = []
-id_pinjam = []
-for i in range(len(full_data_borrow)):
-    if full_data_borrow[i][5] == "False":
-        gadget = mencari_data_gadget(full_data_borrow[i][2])
-        gadget[3] = full_data_borrow[i][4]
-        data_pinjam.append(gadget)
-        id_peminjaman = full_data_borrow[i][0]
-        id_pinjam.append(id_peminjaman)
-        print(str(nomor) + ". " + gadget[1])
-        nomor += 1
-
-nomor_pinjam = masukan_nomor_pinjam()
-tgl_kembali = input_tanggal_valid()
-print("Item " + data_pinjam[nomor_pinjam-1][1] + " (x" + str(data_pinjam[nomor_pinjam-1][3]) + ") telah dikembalikan.")
-add_data_return_csv()
-
-full_data_gadget = line_to_real_value(lines_gadget, 6, 3)
-for i in full_data_gadget:
-    if i[0] == data_pinjam[nomor_pinjam-1][0]:
-        i[3] += data_pinjam[nomor_pinjam-1][3]
-
-ubah_csv_gadget()
-is_returned()
+    new_return = ["R" + str(len(full_data_return)+1), data_pinjam[nomor_pinjam-1][2], tgl_kembali]
+    full_data_return.append(new_return)
