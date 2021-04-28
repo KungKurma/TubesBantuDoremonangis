@@ -26,7 +26,7 @@ def proses_perubahan(array, id_barang):
     jumlah_barang += jumlah_ubah
     modify_data(array, idx_barang, 3, jumlah_barang)
 
-    for i in full_data_gadget:
+    for i in array:
         if i[0] == id_barang:
             nama_barang = i[1]
     if jumlah_ubah >= 0:
@@ -35,7 +35,7 @@ def proses_perubahan(array, id_barang):
         print(str(abs(jumlah_ubah)) + " " + nama_barang + " berhasil dibuang. Stok sekarang: " + str(jumlah_barang))
     return id_tidak_valid
 
-def ubah_jumlah():
+def ubah_jumlah(full_data_gadget, full_data_consum):
     print(">>> ubahjumlah")
     id_tidak_valid = True
     while(id_tidak_valid):
@@ -47,5 +47,3 @@ def ubah_jumlah():
         else:
             print("ID tidak valid! Ulangi masukan!")
             continue
-
-ubah_jumlah()
