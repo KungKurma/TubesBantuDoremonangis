@@ -38,11 +38,11 @@ def input_item(id_user):
     data_pinjam = []
     while(id_tidak_valid):
         id_barang = input("Masukkan ID item: ")
-        for i in range(len(full_data)):
-            if id_barang == full_data[i][0]:
+        for i in range(len(full_data_gadget)):
+            if id_barang == full_data_gadget[i][0]:
                 data_pinjam.append(id_barang)
-                data_pinjam.append(full_data[i][1])
-                data_pinjam.append(full_data[i][3])
+                data_pinjam.append(full_data_gadget[i][1])
+                data_pinjam.append(full_data_gadget[i][3])
                 data_pinjam.append(i)
                 id_tidak_valid = False
         for i in full_data_borrow:
@@ -58,17 +58,13 @@ def input_jumlah_peminjaman(data):
         jumlah_pinjam = int(input("Jumlah peminjaman: "))
         if data[2] >= jumlah_pinjam:
             data[2] -= jumlah_pinjam
-            full_data[data[3]][3] = data[2]
+            full_data_gadget[data[3]][3] = data[2]
             jumlah_tidak_valid = False
         else:
             print("Jumlah barang yang anda masukkan tidak sesuai. Ulangi!")
     return jumlah_pinjam
 
-def meminjam_gadget():
-    print(">>> pinjam")
-    #MEMASUKKAN ID USER (nanti dihapus)
-    id_user = input("Masukkan id user: ")
-
+def meminjam_gadget(id_user, full_data_borrow, full_data_gadget):
     data_pinjam = input_item(id_user)
     tgl_pinjam = input_tanggal_valid()
     jumlah_pinjam = input_jumlah_peminjaman(data_pinjam)
@@ -76,5 +72,3 @@ def meminjam_gadget():
     print("\n"+"Item " + data_pinjam[1] + " (x" + str(jumlah_pinjam) +") berhasil dipinjam!")
     new_borrow  = ["B" + str(len(full_data_borrow)+1), id_user, data_pinjam[0], tgl_pinjam, jumlah_pinjam, "False"]
     full_data_borrow.append(new_borrow)
-
-meminjam_gadget()
