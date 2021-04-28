@@ -52,9 +52,6 @@ def input_tanggal_valid():
                     tgl_tidak_valid = False
     return tgl_pinjam
 
-def modify_data(idx, col, value):
-    full_data[idx][col] = value
-
 def ubah_csv_gadget():
     string_data = header +  "\n"
     for arr_data in full_data:
@@ -66,56 +63,75 @@ def ubah_csv_gadget():
     f.write(string_data)
     f.close
 
+def input_item(id_user):
+    id_tidak_valid = True
+    data_pinjam = []
+    while(id_tidak_valid):
+        id_barang = input("Masukkan ID item: ")
+        for i in range(len(full_data)):
+            if id_barang == full_data[i][0]:
+                data_pinjam.append(id_barang)
+                data_pinjam.append(full_data[i][1])
+                data_pinjam.append(full_data[i][3])
+                data_pinjam.append(i)
+                id_tidak_valid = False
+        for i in full_data_borrow:
+            if ((id_barang == i[2]) and (id_user == i[1]) and i[5] == "False"):
+                id_tidak_valid = True
+        if (id_tidak_valid):
+            print("ID tidak valid! Ulangi masukan!")
+    return data_pinjam
+
+def input_jumlah_peminjaman(data):
+    jumlah_tidak_valid = True
+    while(jumlah_tidak_valid):
+        jumlah_pinjam = int(input("Jumlah peminjaman: "))
+        if data[2] >= jumlah_pinjam:
+            data[2] -= jumlah_pinjam
+            full_data[data[3]][3] = data[2]
+            jumlah_tidak_valid = False
+        else:
+            print("Jumlah barang yang anda masukkan tidak sesuai. Ulangi!")
+    return jumlah_pinjam
+
 f = open("gadget.csv", "r")
 raw_lines = f.readlines()
 f.close()
 lines = [raw_line.replace("\n", "") for raw_line in raw_lines]
-
 header = lines.pop(0)               
-
 full_data = []
 for line in lines:
     data = line_to_data(line, 6)
     real_data = convert_data_to_real_value(data)
     full_data.append(real_data)
 
-print(">>> pinjam")
-
-id_tidak_valid = True
-while(id_tidak_valid):
-    id_pinjam = input("Masukkan ID item: ")
-    nama_barang_pinjam = ""
-    for i in range(len(full_data)):
-        if id_pinjam == full_data[i][0]:
-            barang_pinjam = full_data[i]
-            idx_barang = i
-            id_tidak_valid = False
-    if (id_tidak_valid):
-        print("ID tidak valid! Ulangi masukan!")
-
-tgl_pinjam = input_tanggal_valid()
-
-
-jumlah_tidak_valid = True
-while(jumlah_tidak_valid):
-    jumlah_pinjam = int(input("Jumlah peminjaman: "))
-    if barang_pinjam[3] >= jumlah_pinjam:
-        barang_pinjam[3] -= jumlah_pinjam
-        modify_data(idx_barang, 3, barang_pinjam[3])
-        jumlah_tidak_valid = False
-    else:
-        print("Jumlah barang yang anda masukkan tidak sesuai. Ulangi!")
-
-print("\n"+"Item " + barang_pinjam[1] + " (x" + str(jumlah_pinjam) +") berhasil dipinjam!")
-
 f = open("gadget_borrow_history.csv", "r")
 raw_lines = f.readlines()
 f.close()
 lines_borrow = [raw_line.replace("\n", "") for raw_line in raw_lines]
+header_borrow = lines_borrow.pop(0)
+full_data_borrow = []
+for line in lines_borrow:
+    data = line_to_data(line, 6)
+    full_data_borrow.append(data)
 
-new_data = str("B") + str(len(lines_borrow)) + ";ini id peminjam;" + id_pinjam + ";" + tgl_pinjam + ";" +str(jumlah_pinjam) + ";False"
+print(">>> pinjam")
+
+def meminjam_gadget():
+    #MEMASUKKAN ID USER (nanti dihapus)
+    id_user = input("Masukkan id user: ")
+
+    data_pinjam = input_item(id_user)
+    tgl_pinjam = input_tanggal_valid()
+    jumlah_pinjam = input_jumlah_peminjaman(data_pinjam)
+
+    print("\n"+"Item " + data_pinjam[1] + " (x" + str(jumlah_pinjam) +") berhasil dipinjam!")
+    new_borrow  = ["B" + str(len(full_data_borrow)+1), id_user, data_pinjam[0], tgl_pinjam, jumlah_pinjam, "False"]
+    full_data_borrow.append(new_borrow)
+
+"""new_data = str("B") + str(len(lines_borrow)+1) + ";" + id_user + ";" + data_pinjam[0] + ";" + tgl_pinjam + ";" +str(jumlah_pinjam) + ";False"
 lines_borrow.append(new_data)
-new_string = ""
+new_string = header_borrow + "\n"
 for arr in lines_borrow:
     new_string += arr
     new_string += "\n"
@@ -124,4 +140,6 @@ f = open("gadget_borrow_history.csv", "w")
 f.write(new_string)
 f.close()
 
-ubah_csv_gadget()
+ubah_csv_gadget()"""
+
+meminjam_gadget()
