@@ -34,7 +34,7 @@ while 1:
 				carirarity(db_gadget)
 			elif action == 'Help':
 				Help()
-			elif command == 'save':
+			elif action == 'save':
 				db[0] = convert(db_consumable, Str=True)
 				db[1] = convert(db_consumable_history, Str=True)
 				db[2] = convert(db_gadget, Str=True)
@@ -42,7 +42,7 @@ while 1:
 				db[4] = convert(db_gadget_return_history, Str=True)
 				db[5] = convert(db_user, Str=True)
 				save(files,db)
-			elif command == 'exit':
+			elif action == 'exit':
 				exit()
 			else:
 				print("Error: Command not found.")
