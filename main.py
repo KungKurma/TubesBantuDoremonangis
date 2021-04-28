@@ -23,7 +23,7 @@ db_user = db[5]
 while 1:
 	command = input('>>> ')
 	if command == 'login':
-		user = login()
+		user = login(db_user)
 		while user[0]:
 			action = input('>>> ')
 			if action == 'register' and user[6] == 'Admin':
