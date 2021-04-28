@@ -41,8 +41,8 @@ def get_files():
 def save(files,db):
 	# I.S. diberikan matriks tiap database dalam list
 	# F.S. setiap data disimpan dalam csv yang sesuai
-	# list_db : matriks db dalam list
-	# db : database / nama file (list)
+	# db : matriks db dalam list
+	# files : database / nama file (list)
 	counter = 0
 	for file in files:
 		with open(f"{args.folder}\\{file}",'w') as f:
