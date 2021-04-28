@@ -30,7 +30,7 @@ def get_db():
 	list_db = []
 	for (root,dirs,files) in os.walk(args.folder):
 		for i in files:
-			list_db.append(matriks(i))
+			list_db.append(matriks(f"{args.folder}\\{i}"))
 	return list_db
 
 def get_files():
@@ -45,7 +45,7 @@ def save(files,db):
 	# db : database / nama file (list)
 	counter = 0
 	for file in files:
-		with open(file,'w') as f:
+		with open(f"{args.folder}\\{file}",'w') as f:
 			f.write(";".join(db[counter]+"\n"))
 		counter += 1
 	print('\nLoading',end='')
