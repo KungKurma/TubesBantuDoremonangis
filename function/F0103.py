@@ -100,7 +100,7 @@ def carirarity(db_gadget):
             print("Deskripsi\t\t:",i[2])
             print("Jumlah\t\t\t:",int(i[3]))
             print("Rarity\t\t\t:",i[4],)
-            print("Tahun ditemukan\t:",i[5])
+            print("Tahun ditemukan\t\t:",i[5])
     print('='*10)
 
 def Help():
