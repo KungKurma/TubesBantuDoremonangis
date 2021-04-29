@@ -2,7 +2,7 @@
 # files = list nama file (csv)
 # db = matriks dari tiap isi file (csv)
 
-from function import *
+from ModulFungsi import *
 
 files = get_files()
 db = get_db()
