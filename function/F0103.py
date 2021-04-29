@@ -130,7 +130,7 @@ def Help():
     print("carirarity - mengeluarkan gadget berdasarkan rarity")
     print("caritahun - mengeluarkan gadget berdasarkan tahun ditemukan")
     print("tambahitem - melakukan penambahan item")
-    print("hapus item - menghapus item")
+    print("hapusitem - menghapus item")
     print("ubahjumlah - mengubah jumlah item yang ada")
     print("pinjam - meminjam gadget")
     print("kembalikan - mengembalikan gadget")
