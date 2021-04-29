@@ -37,6 +37,8 @@ while 1:
 			# elif action == '...': (...) -> untuk role Admin dan User
 			elif action == 'carirarity':
 				carirarity(db_gadget)
+			elif action == 'ubahjumlah':
+				ubah_jumlah(db_gadget, db_consumable)
 			elif action == 'Help':
 				Help()
 			elif action == 'save':
