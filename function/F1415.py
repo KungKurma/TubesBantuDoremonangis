@@ -38,6 +38,11 @@ def get_files():
 	for (root,dirs,files) in os.walk(args.folder):
 		return files
 
+def get_path(file_name):
+	# I.S. memerlukan nama file csv sebagai argumen
+	# F.S. mengembalikan nilai berupa lokasi file
+	return f"{args.folder}\\{file_name}"
+
 def save(files,db):
 	# I.S. diberikan matriks tiap database dalam list
 	# F.S. setiap data disimpan dalam csv yang sesuai
