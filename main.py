@@ -33,7 +33,7 @@ while 1:
 			if action == 'register' and user[5] == 'Admin':
 				path = get_path('user.csv')
 				register(path,db_user)
-			# elif action == '...' and user[6] == (Admin/User): (...)
+			# elif action == '...' and user[5] == (Admin/User): (...)
 			# elif action == '...': (...) -> untuk role Admin dan User
 			elif action == 'carirarity':
 				carirarity(db_gadget)
