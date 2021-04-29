@@ -21,6 +21,26 @@ def kapitalisasi(kata):
             kata = kata[0].capitalize() + kata[1:i+1] + kata[i+1].capitalize() + kata[i+2:]
     return kata
 
+def matriks(csv):
+    # I.S. mengimport file csv
+    # F.S. file csv dijadikan matriks
+    with open(csv,'r') as file:
+        line = [clean_line.replace('\n','') for clean_line in file.readlines()]
+        array = []
+        for i in range(len(line)):
+            tempArr = []
+            counter = 0
+            string = line[i]
+            length = len(line[i])
+            for j in range(length):
+                if j == length-1:
+                    tempArr.append(string[counter:(j+1)])
+                elif string[j] == ';':
+                    tempArr.append(string[counter:j])
+                    counter = j + 1
+            array.append(tempArr)
+    return array
+
 def convert(matriks,Str=False,Int=False):
     # I.S. tipe data elemen pada matriks tidak sesuai keinginan
     # F.S. tipe data elemen pada matriks berubah sesuai keinginan
@@ -48,7 +68,7 @@ def adding(csv,new_data):
         for i in new_data:
             file.write(";".join(i)+"\n")
 
-def register(db_user):
+def register(path,db_user):
     # I.S. admin me-register-kan user baru
     # F.S. mengembalikan data user baru berupa list
     terdaftar = False
@@ -66,7 +86,7 @@ def register(db_user):
         print("User {} telah berhasil register ke dalam Kantong Ajaib".format(uname))
         new_user = [id(uname),uname,nama,alamat,password,'User']
         db_user.append(new_user)
-        adding('user.csv',convert(db_user,Str=True))
+        adding(path,convert(db_user,Str=True))
 
 def login(db_user):
     # I.S. input uname dan password
@@ -81,12 +101,12 @@ def login(db_user):
             user = db_user[i]
             break
     if logged_in:
-        user.insert(0,logged_in)
+        # user = [id,uname,nama,alamat,password,role]
         return user
     else:
         print("Maaf, username dan password salah atau tidak ditemukan.")
-        return [logged_in]
-        # user = [logged_in,id,uname,nama,alamat,password,role]
+        # logged_in = False
+        return logged_in
  
 def carirarity(db_gadget):
     # I.S. pengguna memasukkan rarity dari suatu gadget
@@ -121,5 +141,5 @@ def Help():
     print("save - menyimpan perubahan data")
     print("exit - keluar dari program")
 
-# db_user = matriks('user.csv') -> buat jaga-jaga
-# db_gadget = matriks('gadget.csv') -> buat jaga-jaga
+# db_user = matriks('user.csv')
+# db_gadget = matriks('gadget.csv')
