@@ -1,3 +1,7 @@
+# KAMUS
+# files = list nama file (csv)
+# db = matriks dari tiap isi file (csv)
+
 from function import *
 
 files = get_files()
@@ -24,10 +28,11 @@ while 1:
 	command = input('>>> ')
 	if command == 'login':
 		user = login(db_user)
-		while user[0]:
+		while user != False:
 			action = input('>>> ')
-			if action == 'register' and user[6] == 'Admin':
-				register(db_user)
+			if action == 'register' and user[5] == 'Admin':
+				path = get_path('user.csv')
+				register(path,db_user)
 			# elif action == '...' and user[6] == (Admin/User): (...)
 			# elif action == '...': (...) -> untuk role Admin dan User
 			elif action == 'carirarity':
@@ -35,12 +40,12 @@ while 1:
 			elif action == 'Help':
 				Help()
 			elif action == 'save':
-				db[0] = convert(db_consumable, Str=True)
-				db[1] = convert(db_consumable_history, Str=True)
-				db[2] = convert(db_gadget, Str=True)
-				db[3] = convert(db_gadget_borrow_history, Str=True)
-				db[4] = convert(db_gadget_return_history, Str=True)
-				db[5] = convert(db_user, Str=True)
+				db[0] = db_consumable
+				db[1] = db_consumable_history
+				db[2] = db_gadget
+				db[3] = db_gadget_borrow_history
+				db[4] = db_gadget_return_history
+				db[5] = db_user
 				save(files,db)
 			elif action == 'exit':
 				exit()
