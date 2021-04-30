@@ -39,6 +39,8 @@ while 1:
 				carirarity(db_gadget)
 			elif action == 'ubahjumlah':
 				ubah_jumlah(db_gadget, db_consumable)
+			elif action == 'pinjam':
+				meminjam_gadget(user[0],db_gadget_borrow_history, db_gadget)
 			elif action == 'Help':
 				Help()
 			elif action == 'save':
