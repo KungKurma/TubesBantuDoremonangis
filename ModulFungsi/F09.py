@@ -60,6 +60,7 @@ def data_dan_tampilan_awal(id_user,full_data_borrow,full_data_gadget):
             gadget = mencari_data_gadget(full_data_borrow[i][2], full_data_gadget)
             gadget.append(full_data_borrow[i][4])
             gadget.append(full_data_borrow[i][0])
+            gadget.append(full_data_borrow[i][2])
             data_pinjam.append(gadget)
             print(str(nomor) + ". " + gadget[0])
             nomor += 1
@@ -69,22 +70,48 @@ def data_dan_tampilan_awal(id_user,full_data_borrow,full_data_gadget):
         is_ada_pinjaman = True
     return data_pinjam, is_ada_pinjaman
 
+def jumlah_pengembalian(full_data_borrow, full_data_return,id_user, data_pinjam, nomor_pinjam):
+    notValid = True
+    while(notValid):
+        jumlahPinjam = 0
+        for i in full_data_borrow:
+            if (i[1] == id_user and i[2] == data_pinjam[nomor_pinjam-1][3]):
+                jumlahPinjam += int(i[4])
+
+        telahKembali = 0
+        for i in full_data_return:
+            if (i[3] == id_user and i[4] == data_pinjam[nomor_pinjam-1][3]):
+                telahKembali += int(i[5])
+        
+        sisaPinjam = jumlahPinjam-telahKembali
+
+        jumlah_kembali = int(input("Masukkan jumlah pengembalian: "))
+        if jumlah_kembali <= sisaPinjam:
+            sisaPinjam -= jumlah_kembali
+            notValid = False
+        else:
+            print("Jumlah pengembalian tidak sesuai.")
+    return jumlah_kembali, sisaPinjam
+
+
 def mengembalikan_gadget(id_user, full_data_borrow, full_data_gadget, full_data_return):
     data_pinjam, is_ada_pinjaman = data_dan_tampilan_awal(id_user,full_data_borrow,full_data_gadget)
     if (is_ada_pinjaman):
         nomor_pinjam = masukan_nomor_pinjam(data_pinjam)
         tgl_kembali = input_tanggal_valid()
+        jumlah_kembali, sisaPinjam = jumlah_pengembalian(full_data_borrow, full_data_return, id_user, data_pinjam, nomor_pinjam)
 
-        print("\n" + "Item " + data_pinjam[nomor_pinjam-1][0] + " (x" + str(data_pinjam[nomor_pinjam-1][1]) + ") telah dikembalikan.")
+        print("\n" + "Item " + data_pinjam[nomor_pinjam-1][0] + " (x" + str(jumlah_kembali) + ") telah dikembalikan.")
 
         for i in range(1, len(full_data_gadget)):
             if full_data_gadget[i][1] == data_pinjam[nomor_pinjam-1][0]:
-                full_data_gadget[i][3] += int(data_pinjam[nomor_pinjam-1][1])
-        for i in full_data_borrow:
-            if i[0] == data_pinjam[nomor_pinjam-1][2]:
-                i[5] = "True"
+                full_data_gadget[i][3] += jumlah_kembali
+        if(sisaPinjam == 0):
+            for i in full_data_borrow:
+                if i[0] == data_pinjam[nomor_pinjam-1][2]:
+                    i[5] = "True"
 
-        new_return = ["R" + str(len(full_data_return)+1), data_pinjam[nomor_pinjam-1][2], tgl_kembali]
+        new_return = ["R" + str(len(full_data_return)), data_pinjam[nomor_pinjam-1][2], tgl_kembali, str(id_user), data_pinjam[nomor_pinjam-1][3], jumlah_kembali]
         full_data_return.append(new_return)
     else:
         print("\n Anda tidak memiliki pinjaman barang.")
