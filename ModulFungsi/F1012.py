@@ -162,7 +162,7 @@ def riwayatpinjam(db_gadget_borrow_history, db_user, db_gadget, user):
     # I.S. mengecek jika akun pengguna adalah admin
     # F.S. menampilkan sejarah gadget yang dipinjam semua pengguna, mulai dari yang paling baru
     #      (menampilkan 5 data pertama, jika diminta dapat menampilkan lebih banyak)
-    if user[6]=="Admin":
+    if user[5]=="Admin":
         borrow_hist_sort=sort_tanggal(db_gadget_borrow_history)
 
         # mencari nama orang dari id peminjam
@@ -219,7 +219,7 @@ def riwayatkembali(db_gadget_return_history, db_gadget_borrow_history, db_user, 
     #      (menampilkan 5 data pertama, jika diminta dapat menampilkan lebih banyak)
 
     # mengecek jika user adalah admin
-    if user[6] == "Admin":
+    if user[5] == "Admin":
         return_hist_sort=sort_tanggal(db_gadget_return_history)
         # catatan digunakan untuk menyimpan data nama pengambil dan nama gadget
         catatan = [["" for i in range(0, 3)] for j in range(1, len(db_gadget_return_history) + 1)]
