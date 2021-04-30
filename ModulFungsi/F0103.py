@@ -1,12 +1,12 @@
 # Modul berisi spesifikasi dan realisasi F01, F02, dan F03
 
 # KAMUS
-# db_user = matriks user.csv
+# db_user   = matriks user.csv
 # db_gadget = matriks gadget.csv
-# register() -> F01
-# login() -> F02
-# carirarity() -> F03
-# Help() -> F16 (tambahan)
+# F01 : register
+# F02 : login
+# F03 : carirarity
+# F16 : Help (tambahan)
 
 def kapitalisasi(kata):
     # I.S. string yang dimasukkan berhuruf kecil
@@ -20,26 +20,6 @@ def kapitalisasi(kata):
         if i in idx:
             kata = kata[0].capitalize() + kata[1:i+1] + kata[i+1].capitalize() + kata[i+2:]
     return kata
-
-def matriks(csv):
-    # I.S. mengimport file csv
-    # F.S. file csv dijadikan matriks
-    with open(csv,'r') as file:
-        line = [clean_line.replace('\n','') for clean_line in file.readlines()]
-        array = []
-        for i in range(len(line)):
-            tempArr = []
-            counter = 0
-            string = line[i]
-            length = len(line[i])
-            for j in range(length):
-                if j == length-1:
-                    tempArr.append(string[counter:(j+1)])
-                elif string[j] == ';':
-                    tempArr.append(string[counter:j])
-                    counter = j + 1
-            array.append(tempArr)
-    return array
 
 def convert(matriks,Str=False,Int=False):
     # I.S. tipe data elemen pada matriks tidak sesuai keinginan
@@ -141,5 +121,5 @@ def Help():
     print("save - menyimpan perubahan data")
     print("exit - keluar dari program")
 
-# db_user = matriks('user.csv')
-# db_gadget = matriks('gadget.csv')
+# db_user = matriks('user.csv') -> buat jaga-jaga
+# db_gadget = matriks('gadget.csv') -> buat jaga-jaga
