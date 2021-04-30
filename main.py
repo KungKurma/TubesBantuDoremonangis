@@ -37,7 +37,13 @@ while 1:
 			# elif action == '...': (...) -> untuk role Admin dan User
 			elif action == 'carirarity':
 				carirarity(db_gadget)
-			elif action == 'ubahjumlah':
+			elif action == 'caritahun':
+				cariGadget(db_gadget)
+			elif action == 'tambahitem' and user[5] == "Admin":
+				db_gadget, db_consumable = tambahItem(db_gadget, db_consumable)
+			elif action == 'hapusitem' and user[5] == "Admin":
+				db_gadget, db_consumable = hapusItem(db_gadget, db_consumable)
+			elif action == 'ubahjumlah':	
 				ubah_jumlah(db_gadget, db_consumable)
 			elif action == 'pinjam':
 				meminjam_gadget(user[0],db_gadget_borrow_history, db_gadget)
