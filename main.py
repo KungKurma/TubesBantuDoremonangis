@@ -41,6 +41,8 @@ while 1:
 				ubah_jumlah(db_gadget, db_consumable)
 			elif action == 'pinjam':
 				meminjam_gadget(user[0],db_gadget_borrow_history, db_gadget)
+			elif action == 'kembalikan':
+				mengembalikan_gadget(user[0], db_gadget_borrow_history, db_gadget, db_gadget_return_history)
 			elif action == 'Help':
 				Help()
 			elif action == 'save':
