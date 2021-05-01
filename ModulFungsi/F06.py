@@ -4,10 +4,27 @@
 # F.S. Item dibuang dari database / pesan error jika input ID tidak ada / tidak ada yang terjadi bila proses di cancel
 
 
-# KAMUS 
-# databaseG : list of list
-# databaseC : list of list
-"""Ganti berdasarkan datatype"""
+# KAMUS
+# type type gadget : <ID        : string, 
+#                     Nama      : string,
+#                     Deskripsi : string,
+#                     Jumlah    : string,
+#                     Rarity    : string,
+#                     Tahun     : string>
+
+# type dbG : array of gadget
+
+# type type consumable : <ID        : string, 
+#                         Nama      : string,
+#                         Deskripsi : string,
+#                         Jumlah    : string,
+#                         Rarity    : string>
+
+# type dbC : array of consumable
+
+# databaseG : dbG 
+# databaseC : dbC 
+
 # ID : string
 
 
@@ -49,8 +66,8 @@ def removeDatabase(ID, database):
 # index : integer
 
 # confirmation : string
-# temp: list of list
-    """Ganti datatype"""
+# temp: (dbG/dbC)
+
 # ALGORITMA
     index = getIndex(ID, database)  # Index dari item
 
