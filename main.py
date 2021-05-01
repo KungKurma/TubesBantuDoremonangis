@@ -30,28 +30,28 @@ db_user = convert(db[5], Int=True)
 
 while 1:
 	command = input('>>> ')
-	if command == 'login':												# F02
+	if command == 'login':								# F02
 		user = login(db_user)
 		while user != False:
 			action = input('>>> ')
-			if action == 'register' and user[5] == 'Admin':				# F01 (Admin only)
+			if action == 'register' and user[5] == 'Admin':			# F01 (Admin only)
 				path = get_path('user.csv')
 				register(path,db_user)
-			elif action == 'carirarity':								# F03
+			elif action == 'carirarity':					# F03
 				carirarity(db_gadget)
-			elif action == 'caritahun':									# F04
+			elif action == 'caritahun':					# F04
 				cariTahun(db_gadget)
-			elif action == 'tambahitem' and user[5] == "Admin":			# F05 (Admin only)
+			elif action == 'tambahitem' and user[5] == "Admin":		# F05 (Admin only)
 				db_gadget, db_consumable = tambahItem(db_gadget, db_consumable)
-			elif action == 'hapusitem' and user[5] == "Admin":			# F06 (Admin only)
+			elif action == 'hapusitem' and user[5] == "Admin":		# F06 (Admin only)
 				db_gadget, db_consumable = hapusItem(db_gadget, db_consumable)
-			elif action == 'ubahjumlah' and user[5] == "Admin":			# F07 (Admin only)
+			elif action == 'ubahjumlah' and user[5] == "Admin":		# F07 (Admin only)
 				ubah_jumlah(db_gadget, db_consumable)
-			elif action == 'pinjam' and user[5] == "User":				# F08 (User only)
+			elif action == 'pinjam' and user[5] == "User":			# F08 (User only)
 				meminjam_gadget(user[0],db_gadget_borrow_history, db_gadget)
-			elif action == 'kembalikan' and user[5] == "User":			# F09 (User only)
+			elif action == 'kembalikan' and user[5] == "User":		# F09 (User only)
 				mengembalikan_gadget(user[0], db_gadget_borrow_history, db_gadget, db_gadget_return_history)
-			elif action == 'minta' and user[5] == "User":				# F10 (User only)
+			elif action == 'minta' and user[5] == "User":			# F10 (User only)
 				hasil_minta = minta(db_consumable, db_consumable_history, user)
 				if hasil_minta:
 					db_consumable_history = hasil_minta[1]
@@ -68,11 +68,14 @@ while 1:
 				db[3] = convert(db_gadget_borrow_history,Str=True)
 				db[4] = convert(db_gadget_return_history,Str=True)
 				db[5] = convert(db_user,Str=True)
-				directory = get_directory()
-				save(files,db,directory)
-			elif action == 'Help':										# F16
+				directory = input("Masukkan nama folder penyimpanan: ")
+				if check_directory(directory):
+					save(files,db,directory)
+				else:
+					save(files,db,get_directory(directory))
+			elif action == 'Help':						# F16
 				Help()
-			elif action == 'exit':										# F17
+			elif action == 'exit':						# F17
 				while 1:
 					save_last_changes = input("Ingin menyimpan perubahan (Y/N): ")
 					save_last_changes = save_last_changes.capitalize()
@@ -83,8 +86,11 @@ while 1:
 						db[3] = convert(db_gadget_borrow_history,Str=True)
 						db[4] = convert(db_gadget_return_history,Str=True)
 						db[5] = convert(db_user,Str=True)
-						directory = get_directory()
-						save(files,db,directory)
+						directory = input("Masukkan nama folder penyimpanan: ")
+						if check_directory(directory):
+							save(files,db,directory)
+						else:
+							save(files,db,get_directory(directory))
 						break
 					elif save_last_changes == 'N':
 						break
