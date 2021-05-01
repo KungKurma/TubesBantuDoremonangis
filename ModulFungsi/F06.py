@@ -43,7 +43,7 @@ def getIndex(ID, database):
 
 
 def removeDatabase(ID, database):
-# Prosedur yang dijalankan program setelah validasi (asumsi ID memang ada di database)
+# Fungsi yang dijalankan program setelah validasi (asumsi ID memang ada di database)
 
 # KAMUS LOKAL
 # index : integer
