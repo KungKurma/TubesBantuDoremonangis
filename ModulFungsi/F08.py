@@ -49,18 +49,22 @@ def input_item(id_user, full_data_gadget, full_data_borrow):
     id_tidak_valid = True
     data_pinjam = []
     while(id_tidak_valid):
+        id_kembar = False
         id_barang = input("Masukkan ID item: ")
-        for i in range(len(full_data_gadget)):
-            if id_barang == full_data_gadget[i][0]:
-                data_pinjam.append(id_barang)
-                data_pinjam.append(full_data_gadget[i][1])
-                data_pinjam.append(full_data_gadget[i][3])
-                data_pinjam.append(i)
-                id_tidak_valid = False
         for i in full_data_borrow:
             if ((id_barang == i[2]) and (id_user == i[1]) and i[5] == "False"):
+                print("Barang sedang dipinjam. Pinjam barang lainnya.")
                 id_tidak_valid = True
-        if (id_tidak_valid):
+                id_kembar = True
+        if id_kembar == False :
+            for i in range(len(full_data_gadget)):
+                if id_barang == full_data_gadget[i][0]:
+                    data_pinjam.append(id_barang)
+                    data_pinjam.append(full_data_gadget[i][1])
+                    data_pinjam.append(full_data_gadget[i][3])
+                    data_pinjam.append(i)
+                    id_tidak_valid = False
+        if (id_tidak_valid and id_kembar == False):
             print("ID tidak valid! Ulangi masukan!")
     return data_pinjam #[id barang, nama barang, jumlah barang, index]
 
