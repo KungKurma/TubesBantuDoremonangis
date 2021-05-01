@@ -10,7 +10,7 @@
 """Nanti ganti data typenya"""
 
 # isGadget : boolean
-# ID, Nama, Deskripsi, Jumlah, Rarity, Tahun     : string
+# ID, Nama, Deskripsi, Jumlah, Rarity, Tahun : string
 # Item : list
 
 
