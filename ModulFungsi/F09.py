@@ -15,12 +15,13 @@ def data_dan_tampilan_awal(id_user,full_data_borrow,full_data_gadget):
     for i in range(len(full_data_borrow)):
         if full_data_borrow[i][5] == "False" and id_user == full_data_borrow[i][1]:
             gadget = mencari_data_gadget(full_data_borrow[i][2], full_data_gadget)
-            gadget.append(full_data_borrow[i][4])
-            gadget.append(full_data_borrow[i][0])
-            gadget.append(full_data_borrow[i][2])
-            data_pinjam.append(gadget)
-            print(str(nomor) + ". " + gadget[0])
-            nomor += 1
+            if gadget != None:
+                gadget.append(full_data_borrow[i][4])
+                gadget.append(full_data_borrow[i][0])
+                gadget.append(full_data_borrow[i][2])
+                data_pinjam.append(gadget)
+                print(str(nomor) + ". " + gadget[0])
+                nomor += 1
     if nomor == 1:
         is_ada_pinjaman = False
     else:
