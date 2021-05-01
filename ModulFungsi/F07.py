@@ -55,5 +55,7 @@ def ubah_jumlah(full_data_gadget, full_data_consum):
         id_tidak_valid = proses_perubahan(full_data_gadget, id_barang)
     elif id_barang[0] == "C":
         id_tidak_valid = proses_perubahan(full_data_consum, id_barang)
+    else:
+        id_tidak_valid = True
     if id_tidak_valid != False:
         print("Tidak ada item dengan id tersebut") 
