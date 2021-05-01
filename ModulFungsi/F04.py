@@ -30,7 +30,7 @@ def cetakSearch(Id, database):
 
 
 # PROGRAM UTAMA
-def cariGadget(database):
+def cariTahun(database):
     database = database[1:]     # Menghilangkan bagian awal list yang berisi [id, nama, ...]
     
     # Meminta input user
