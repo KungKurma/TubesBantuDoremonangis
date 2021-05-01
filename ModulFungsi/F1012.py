@@ -93,6 +93,36 @@ def sort_tanggal(array):
                         array_sort[i] = array_simpan
     return (array_sort)
 
+def sort_tanggal_2(array):
+    # I.S. menerima matriks away yang diubah oleh fungsi matriks untuk
+    #      file gadget borrow history dan gadget return history
+    # F.S. mengeluarkan matriks yang sudah diurutkan berdasarkan tanggal
+    #      menggunakan selection sort
+    array_sort = array
+    for i in range(1, len(array) - 1):
+        Imax = i
+        for j in range(i, len(array)):
+            tanggal_baris_start = cek_tanggal(array_sort[i][2])
+            tanggal_baris_lain = cek_tanggal(array_sort[j][2])
+            if (tanggal_baris_start[2] < tanggal_baris_lain[2]):
+                Imax = j
+                array_simpan = array_sort[Imax]
+                array[Imax] = array_sort[i]
+                array_sort[i] = array_simpan
+            elif (tanggal_baris_start[2] == tanggal_baris_lain[2]):
+                if (tanggal_baris_start[1] < tanggal_baris_lain[1]):
+                    Imax = j
+                    array_simpan = array_sort[Imax]
+                    array[Imax] = array_sort[i]
+                    array_sort[i] = array_simpan
+                elif (tanggal_baris_start[1] == tanggal_baris_lain[1]):
+                    if (tanggal_baris_start[0] < tanggal_baris_lain[0]):
+                        Imax = j
+                        array_simpan = array_sort[Imax]
+                        array[Imax] = array_sort[i]
+                        array_sort[i] = array_simpan
+    return (array_sort)
+
 def minta(db_consumable, db_consumable_history, user):
     # I.S. pengguna memasukkan ID item, jumlah item, dan tanggal item diambil
     # F.S. menampilkan apakah item berhasil diambil, mengembalikan list item baru, mencatat
@@ -197,8 +227,8 @@ def riwayatpinjam(db_gadget_borrow_history, db_user, db_gadget, user):
                         v = 2
                 else:
                     v = 2
-            elif (barishistory <= 5):
-                for i in range(barisawal, barishistory):
+            elif (0 < barishistory and barishistory <= 5):
+                for i in range(1, barishistory+1):
                     print("ID Peminjaman: " + str(borrow_hist_sort[i][0]))
                     print("Nama Pengambil: " + str(borrow_hist_sort[i][1]))
                     print("Nama Gadget: " + str(borrow_hist_sort[i][2]))
@@ -206,39 +236,32 @@ def riwayatpinjam(db_gadget_borrow_history, db_user, db_gadget, user):
                     print("Jumlah: " + str(borrow_hist_sort[i][4]))
                     print("")
                 v = 2
+            elif (barishistory == 0):
+                print("Belum ada barang yang dipinjam")
+                v = 2
     else:
         print("Anda tidak dapat mengakses riwayat pinjam")
 
-def riwayatkembali(db_gadget_return_history, db_gadget_borrow_history, db_user, db_gadget, user):
+def riwayatkembali(db_gadget_return_history, db_user, db_gadget, user):
     # I.S. mengecek jika akun pengguna adalah admin
     # F.S. menampilkan sejarah gadget yang dikembalikan semua pengguna, mulai dari yang paling baru
     #      (menampilkan 5 data pertama, jika diminta dapat menampilkan lebih banyak)
 
     # mengecek jika user adalah admin
     if user[5] == "Admin":
-        return_hist_sort=sort_tanggal(db_gadget_return_history)
+        return_hist_sort=sort_tanggal_2(db_gadget_return_history)
         # catatan digunakan untuk menyimpan data nama pengambil dan nama gadget
-        catatan = [["" for i in range(0, 3)] for j in range(1, len(db_gadget_return_history) + 1)]
 
-        # mengecek jika kode peminjaman ada di file gadget_return_history.csv
+        # mencari nama orang dari id peminjam
         for i in range(1, len(db_gadget_return_history)):
-            for j in range(1, len(db_gadget_borrow_history)):
-                if (return_hist_sort[i][1] == db_gadget_borrow_history[j][0]):
-                    catatan[i][0] = db_gadget_borrow_history[j][0]
-
-        # mencari nama orang dari melalui id pengguna dari file gadget_borrow_history
-        for k in range(1, len(db_gadget_return_history)):
-            for i in range(1, len(db_user)):
-                for j in range(1, len(db_gadget_borrow_history)):
-                    if (db_user[i][0] == db_gadget_borrow_history[j][1] and db_gadget_borrow_history[j][0] == catatan[k][0]):
-                        catatan[k][1] = db_user[i][2]
-
-        # mencari nama gadget dari melalui id gadget dari file gadget_borrow_history
-        for k in range(1, len(db_gadget_return_history)):
-            for i in range(1, len(db_gadget)):
-                for j in range(1, len(db_gadget_borrow_history)):
-                    if (db_gadget[i][0] == db_gadget_borrow_history[j][2] and db_gadget_borrow_history[j][0] == catatan[k][0]):
-                        catatan[k][2] = db_gadget[i][1]
+            for j in range(1, len(db_user)):
+                if (return_hist_sort[i][3] == db_user[j][0]):
+                    return_hist_sort[i][3] = db_user[j][2]
+        # mencari nama gadget dari id gadget
+        for i in range(1, len(db_gadget_return_history)):
+            for j in range(1, len(db_gadget)):
+                if (return_hist_sort[i][4] == db_gadget[j][0]):
+                    return_hist_sort[i][4] = db_gadget[j][1]
 
         barishistory = len(db_gadget_return_history) - 1
         barisawal = 1
@@ -249,11 +272,11 @@ def riwayatkembali(db_gadget_return_history, db_gadget_borrow_history, db_user, 
         while (v < 2):
             if (barishistory > 5):
                 while (w <= 5 and barisawal <= barishistory):
-                    print("ID pengembalian: " + str(return_hist_sort[barisawal][0]))
-                    print("Nama pengambil: " + str(catatan[barisawal][1]))
-                    print("Nama Gadget: " + str(catatan[barisawal][2]))
+                    print("ID pengembalian: " + str(return_hist_sort[barisawal][1]))
+                    print("Nama pengambil: " + str(return_hist_sort[barisawal][3]))
+                    print("Nama Gadget: " + str(return_hist_sort[barisawal][4]))
                     print("Tanggal pengambilan: " + str(return_hist_sort[barisawal][2]))
-                    print("Jumlah: " + str(return_hist_sort[barisawal][3]))
+                    print("Jumlah: " + str(return_hist_sort[barisawal][5]))
                     print("")
                     barisawal += 1
                     w += 1
@@ -266,14 +289,17 @@ def riwayatkembali(db_gadget_return_history, db_gadget_borrow_history, db_user, 
                 else:
                     v = 2
 
-            elif (barishistory <= 5):
+            elif (0 < barishistory and barishistory <= 5):
                 for barisawal in range(1, barishistory + 1):
-                    print("ID pengembalian: " + str(return_hist_sort[barisawal][0]))
-                    print("Nama pengambil: " + str(catatan[barisawal][1]))
-                    print("Nama Gadget: " + str(catatan[barisawal][2]))
+                    print("ID pengembalian: " + str(return_hist_sort[barisawal][1]))
+                    print("Nama pengambil: " + str(return_hist_sort[barisawal][3]))
+                    print("Nama Gadget: " + str(return_hist_sort[barisawal][4]))
                     print("Tanggal pengambilan: " + str(return_hist_sort[barisawal][2]))
-                    print("Jumlah: " + str(return_hist_sort[barisawal][3]))
+                    print("Jumlah: " + str(return_hist_sort[barisawal][5]))
                     print("")
+                v = 2
+            elif (barishistory == 0):
+                print("Belum ada barang yang dikembalikan")
                 v = 2
     else:
         print("Anda tidak dapat mengakses riwayat pengembalian")

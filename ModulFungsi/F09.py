@@ -135,4 +135,4 @@ def mengembalikan_gadget(id_user, full_data_borrow, full_data_gadget, full_data_
 
 """Untuk keperluan bonus ditambahkan field baru di gadget_return_history.csv, 
    yaitu jumlah_pengembalian, id_gadget, dan id_user. id_gadget dan id_user ditambahkan
-   untuk keperluan validasi jumlah pengembalian dan keterangan isReturned di gadget_borrow_history.""" 
+   untuk keperluan validasi jumlah pengembalian dan keterangan isReturned di gadget_borrow_history."""

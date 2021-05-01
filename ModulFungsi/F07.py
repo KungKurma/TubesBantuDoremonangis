@@ -58,4 +58,4 @@ def ubah_jumlah(full_data_gadget, full_data_consum):
     else:
         id_tidak_valid = True
     if id_tidak_valid != False:
-        print("Tidak ada item dengan id tersebut") 
+        print("Tidak ada item dengan id tersebut")

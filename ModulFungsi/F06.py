@@ -43,7 +43,7 @@ def getIndex(ID, database):
 
 
 def removeDatabase(ID, database):
-# Fungsi yang dijalankan program setelah validasi (asumsi ID memang ada di database)
+# Prosedur yang dijalankan program setelah validasi (asumsi ID memang ada di database)
 
 # KAMUS LOKAL
 # index : integer
@@ -95,8 +95,4 @@ def hapusItem(databaseG, databaseC):
         else:               # Jika item consumable
             databaseC = removeDatabase(ID, databaseC)
 
-    return (databaseG, databaseC)  
-
-
-
-    
+    return (databaseG, databaseC)

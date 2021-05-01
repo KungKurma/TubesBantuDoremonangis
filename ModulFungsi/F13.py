@@ -6,7 +6,6 @@
 # db_user : variabel global dari load data / matriks user.csv
 # riwayatambil() -> F13
 
-
 def matriks(csv):
     # I.S. mengimport file csv
     # F.S. file csv dijadikan matriks
@@ -91,8 +90,35 @@ def sort_tanggal(array):
                         array_sort[i] = array_simpan
     return (array_sort)
 
-
-
+def sort_tanggal_2(array):
+    # I.S. menerima matriks away yang diubah oleh fungsi matriks untuk
+    #      file gadget borrow history dan gadget return history
+    # F.S. mengeluarkan matriks yang sudah diurutkan berdasarkan tanggal
+    #      menggunakan selection sort
+    array_sort = array
+    for i in range(1, len(array) - 1):
+        Imax = i
+        for j in range(i, len(array)):
+            tanggal_baris_start = cek_tanggal(array_sort[i][2])
+            tanggal_baris_lain = cek_tanggal(array_sort[j][2])
+            if (tanggal_baris_start[2] < tanggal_baris_lain[2]):
+                Imax = j
+                array_simpan = array_sort[Imax]
+                array[Imax] = array_sort[i]
+                array_sort[i] = array_simpan
+            elif (tanggal_baris_start[2] == tanggal_baris_lain[2]):
+                if (tanggal_baris_start[1] < tanggal_baris_lain[1]):
+                    Imax = j
+                    array_simpan = array_sort[Imax]
+                    array[Imax] = array_sort[i]
+                    array_sort[i] = array_simpan
+                elif (tanggal_baris_start[1] == tanggal_baris_lain[1]):
+                    if (tanggal_baris_start[0] < tanggal_baris_lain[0]):
+                        Imax = j
+                        array_simpan = array_sort[Imax]
+                        array[Imax] = array_sort[i]
+                        array_sort[i] = array_simpan
+    return (array_sort)
 
 def riwayatambil(db_consumable_history, db_user, db_consumable, user):
     # I.S. mengecek jika akun pengguna adalah admin
@@ -106,7 +132,7 @@ def riwayatambil(db_consumable_history, db_user, db_consumable, user):
             for j in range(1, len(db_user)):
                 if (take_hist_sort[i][1] == db_user[j][0]):
                     take_hist_sort[i][1] = db_user[j][2]
-        # mencari nama consumable dari id consumable
+        # mencari nama consumbale dari id consumable
         for i in range(1, len(db_consumable_history)):
             for j in range(1, len(db_consumable)):
                 if (take_hist_sort[i][2] == db_consumable[j][0]):
@@ -123,7 +149,7 @@ def riwayatambil(db_consumable_history, db_user, db_consumable, user):
                 while (w <= 5 and barisawal <= barishistory):
                     print("ID Peminjaman: " + str(take_hist_sort[barisawal][0]))
                     print("Nama Pengambil: " + str(take_hist_sort[barisawal][1]))
-                    print("Nama Gadget: " + str(take_hist_sort[barisawal][2]))
+                    print("Nama Consumable: " + str(take_hist_sort[barisawal][2]))
                     print("Tanggal Peminjaman: " + str(take_hist_sort[barisawal][3]))
                     print("Jumlah: " + str(take_hist_sort[barisawal][4]))
                     print("")
@@ -137,17 +163,17 @@ def riwayatambil(db_consumable_history, db_user, db_consumable, user):
                         v = 2
                 else:
                     v = 2
-            elif (barishistory <= 5):
-                for i in range(barisawal, barishistory):
-                    print("ID Pengambilan: " + str(take_hist_sort[i][0]))
+            elif (0 < barishistory and barishistory <= 5):
+                for i in range(1, barishistory+1):
+                    print("ID Peminjaman: " + str(take_hist_sort[i][0]))
                     print("Nama Pengambil: " + str(take_hist_sort[i][1]))
                     print("Nama Consumable: " + str(take_hist_sort[i][2]))
                     print("Tanggal Peminjaman: " + str(take_hist_sort[i][3]))
                     print("Jumlah: " + str(take_hist_sort[i][4]))
                     print("")
                 v = 2
+            elif (barishistory == 0):
+                print("Belum ada consumable yang diambil")
+                v = 2
     else:
         print("Anda tidak dapat mengakses riwayat pengambilan")
-
-
-
