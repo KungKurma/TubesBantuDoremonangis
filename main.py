@@ -53,7 +53,8 @@ while 1:
 				mengembalikan_gadget(user[0], db_gadget_borrow_history, db_gadget, db_gadget_return_history)
 			elif action == 'minta' and user[5] == "User":			# F10 (User only)
 				hasil_minta = minta(db_consumable, db_consumable_history, user)
-				db_consumable_history = hasil_minta[1]
+				if hasil_minta:
+					db_consumable_history = hasil_minta[1]
 			elif action == 'riwayatpinjam' and user[5] == "Admin":		# F11 (Admin only)
 				riwayatpinjam(db_gadget_borrow_history, db_user, db_gadget, user)
 			elif action == 'riwayatkembali' and user[5] == "Admin":		# F12 (Admin only)
