@@ -6,7 +6,17 @@
 
 
 # KAMUS 
-# database : list of list
+
+# type type gadget : <ID        : string, 
+#                     Nama      : string,
+#                     Deskripsi : string,
+#                     Jumlah    : string,
+#                     Rarity    : string,
+#                     Tahun     : string>
+
+# type dbG : array of gadget
+
+# database : dbG
 # tahun    : integer
 # kategori : string
 # found    : boolean 
