@@ -1,8 +1,5 @@
 #F07
 
-#Kamus
-# db_gadget = matriks dari gadget.csv
-# db_consumable = matriks dari consumables.csv
 
 def modify_data(matriks, idx, col, value):
 # I.S. : Matriks, indeks, kolom, serta nilai akhir dari data yang ingin diubah
@@ -37,7 +34,7 @@ def proses_perubahan(matriks, id_barang):
             if i[0] == id_barang:
                 nama_barang = i[1]
         if jumlah_tidak_valid == True:
-            print("\n" + str(abs(jumlah_ubah)) + " " + nama_barang + "gagal dibuang karena stok kurang. Stok sekarang: " + str(jumlah_barang) + "(<" + str(abs(jumlah_ubah))+ ")")
+            print("\n" + str(abs(jumlah_ubah)) + " " + nama_barang + " gagal dibuang karena stok kurang. Stok sekarang: " + str(jumlah_barang) + "(<" + str(abs(jumlah_ubah))+ ")")
         else:
             jumlah_barang = int(jumlah_barang) + jumlah_ubah
             modify_data(matriks, idx_barang, 3, jumlah_barang)
