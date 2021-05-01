@@ -43,14 +43,14 @@ def get_path(file_name):
 	# F.S. mengembalikan nilai berupa lokasi file
 	return f"{args.folder}\\{file_name}"
 
-def save(files,db):
+def save(files,db,directory):
 	# I.S. diberikan matriks tiap database dalam list
 	# F.S. setiap data disimpan dalam csv yang sesuai
 	# db : matriks db dalam list
 	# files : database / nama file (list)
 	counter = 0
 	for file in files:
-		with open(f"{args.folder}\\{file}",'w') as f:
+		with open(f"{directory}\\{file}",'w') as f:
 			for i in db[counter]:
 				f.write(";".join(i)+"\n")
 		counter += 1
@@ -59,6 +59,20 @@ def save(files,db):
 		time.sleep(1)
 		print('.',end='')
 	print('\nDATA SAVED!\n')
+
+def get_directory(dir_name):
+	# I.S. pengguna memasukkan nama folder
+	# F.S. mengembalikan nama folder (string)
+	os.mkdir(directory)
+	return directory
+
+def check_directory(directory):
+	# I.S. diberikan nama directory
+	# F.S. akan dicek apakah directory sudah ada
+	for i in os.listdir():
+		if directory == i:
+			return True
+	return False
 
 parser = argparse.ArgumentParser(description='nama folder')
 parser.add_argument('folder', type=str, help='definisikan folder')
