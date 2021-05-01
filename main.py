@@ -61,7 +61,7 @@ while 1:
 				riwayatkembali(db_gadget_return_history, db_user, db_gadget, user)
 			elif action == 'riwayatambil' and user [5] == "Admin":		# F13 (Admin only)
 				riwayatambil(db_consumable_history,db_user, db_consumable, user)
-			elif action == 'save':										# F15
+			elif action == 'save':						# F15
 				db[0] = convert(db_consumable,Str=True)
 				db[1] = convert(db_consumable_history,Str=True)
 				db[2] = convert(db_gadget,Str=True)
