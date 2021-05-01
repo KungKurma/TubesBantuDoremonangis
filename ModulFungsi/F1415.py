@@ -60,7 +60,7 @@ def save(files,db,directory):
 		print('.',end='')
 	print('\nDATA SAVED!\n')
 
-def get_directory(dir_name):
+def get_directory(directory):
 	# I.S. pengguna memasukkan nama folder
 	# F.S. mengembalikan nama folder (string)
 	os.mkdir(directory)
