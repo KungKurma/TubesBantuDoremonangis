@@ -49,6 +49,13 @@ while 1:
 				meminjam_gadget(user[0],db_gadget_borrow_history, db_gadget)
 			elif action == 'kembalikan' and user [5] == "User":
 				mengembalikan_gadget(user[0], db_gadget_borrow_history, db_gadget, db_gadget_return_history)
+			elif action == 'minta':
+				hasil_minta=minta(db_consumable, db_consumable_history, user)
+				db_consumable_history=hasil_minta[1]
+			elif action == 'riwayatpinjam':
+				riwayatpinjam(db_gadget_borrow_history, db_user, db_gadget, user)
+			elif action == 'riwayatkembali':
+				riwayatkembali(db_gadget_return_history, db_user, db_gadget, user)
 			elif action == 'Help':
 				Help()
 			elif action == 'save':
