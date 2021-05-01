@@ -51,11 +51,12 @@ def input_item(id_user, full_data_gadget, full_data_borrow):
     while(id_tidak_valid):
         id_kembar = False
         id_barang = input("Masukkan ID item: ")
-        for i in full_data_borrow:
-            if ((id_barang == i[2]) and (id_user == i[1]) and i[5] == "False"):
-                print("Barang sedang dipinjam. Pinjam barang lainnya.")
-                id_tidak_valid = True
-                id_kembar = True
+        if len(full_data_borrow) == 1 :
+            for i in full_data_borrow:
+                if ((id_barang == i[2]) and (id_user == i[1]) and i[5] == "False"):
+                    print("Barang sedang dipinjam. Pinjam barang lainnya.")
+                    id_tidak_valid = True
+                    id_kembar = True
         if id_kembar == False :
             for i in range(len(full_data_gadget)):
                 if id_barang == full_data_gadget[i][0]:
