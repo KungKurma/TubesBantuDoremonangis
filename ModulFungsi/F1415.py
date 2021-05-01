@@ -77,9 +77,4 @@ def check_directory(directory):
 parser = argparse.ArgumentParser(description='nama folder')
 parser.add_argument('folder', type=str, help='definisikan folder')
 args = parser.parse_args()
-
-if args.folder == "KantongAjaib":
-	print("\nSelamat datang di Kantong Ajaib!")
-else:
-	print("Error: Folder not found.")
-	exit()
+print("\nSelamat datang di Kantong Ajaib!")
