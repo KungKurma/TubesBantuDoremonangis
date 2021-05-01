@@ -54,7 +54,7 @@ def save(files,db):
 			for i in db[counter]:
 				f.write(";".join(i)+"\n")
 		counter += 1
-	print('\nLoading',end='')
+	print('\nSaving',end='')
 	for i in range(3):
 		time.sleep(1)
 		print('.',end='')
@@ -65,7 +65,7 @@ parser.add_argument('folder', type=str, help='definisikan folder')
 args = parser.parse_args()
 
 if args.folder == "KantongAjaib":
-	print("Selamat datang di Kantong Ajaib!")
+	print("\nSelamat datang di Kantong Ajaib!")
 else:
 	print("Error: Folder not found.")
 	exit()
