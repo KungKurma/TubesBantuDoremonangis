@@ -60,12 +60,19 @@ def save(files,db,directory):
 		print('.',end='')
 	print('\nDATA SAVED!\n')
 
-def get_directory():
+def get_directory(dir_name):
 	# I.S. pengguna memasukkan nama folder
 	# F.S. mengembalikan nama folder (string)
-	directory = input("Masukkan nama folder: ")
 	os.mkdir(directory)
 	return directory
+
+def check_directory(directory):
+	# I.S. diberikan nama directory
+	# F.S. akan dicek apakah directory sudah ada
+	for i in os.listdir():
+		if directory == i:
+			return True
+	return False
 
 parser = argparse.ArgumentParser(description='nama folder')
 parser.add_argument('folder', type=str, help='definisikan folder')
