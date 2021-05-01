@@ -28,16 +28,16 @@ db_user = convert(db[5], Int=True)
 
 while 1:
 	command = input('>>> ')
-	if command == 'login':												# F02
+	if command == 'login':									# F02
 		user = login(db_user)
 		while user != False:
 			action = input('>>> ')
 			if action == 'register' and user[5] == 'Admin':				# F01 (Admin only)
 				path = get_path('user.csv')
 				register(path,db_user)
-			elif action == 'carirarity':								# F03
+			elif action == 'carirarity':						# F03
 				carirarity(db_gadget)
-			elif action == 'caritahun':									# F04
+			elif action == 'caritahun':						# F04
 				cariTahun(db_gadget)
 			elif action == 'tambahitem' and user[5] == "Admin":			# F05 (Admin only)
 				db_gadget, db_consumable = tambahItem(db_gadget, db_consumable)
@@ -59,7 +59,7 @@ while 1:
 
 			# F13 belum ada...
 
-			elif action == 'save':										# F15
+			elif action == 'save':						# F15
 				db[0] = convert(db_consumable,Str=True)
 				db[1] = convert(db_consumable_history,Str=True)
 				db[2] = convert(db_gadget,Str=True)
@@ -67,9 +67,9 @@ while 1:
 				db[4] = convert(db_gadget_return_history,Str=True)
 				db[5] = convert(db_user,Str=True)
 				save(files,db)
-			elif action == 'Help':										# F16
+			elif action == 'Help':						# F16
 				Help()
-			elif action == 'exit':										# F17
+			elif action == 'exit':						# F17
 				while 1:
 					save_last_changes = input("Ingin menyimpan perubahan (Y/N): ")
 					save_last_changes = save_last_changes.capitalize()
