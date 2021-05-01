@@ -56,8 +56,8 @@ while 1:
 				riwayatpinjam(db_gadget_borrow_history, db_user, db_gadget, user)
 			elif action == 'riwayatkembali' and user[5] == "Admin":		# F12 (Admin only)
 				riwayatkembali(db_gadget_return_history, db_user, db_gadget, user)
-
-			# F13 belum ada...
+			elif action == 'riwayatambil' and user [5] == "Admin":
+				riwayatambil(db_consumable_history,db_user, db_consumable, user)    # F13 (Admin only)
 
 			elif action == 'save':						# F15
 				db[0] = convert(db_consumable,Str=True)
