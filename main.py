@@ -61,14 +61,18 @@ while 1:
 				riwayatkembali(db_gadget_return_history, db_user, db_gadget, user)
 			elif action == 'riwayatambil' and user [5] == "Admin":		# F13 (Admin only)
 				riwayatambil(db_consumable_history,db_user, db_consumable, user)
-			elif action == 'save':						# F15
+			elif action == 'save':										# F15
 				db[0] = convert(db_consumable,Str=True)
 				db[1] = convert(db_consumable_history,Str=True)
 				db[2] = convert(db_gadget,Str=True)
 				db[3] = convert(db_gadget_borrow_history,Str=True)
 				db[4] = convert(db_gadget_return_history,Str=True)
 				db[5] = convert(db_user,Str=True)
-				save(files,db)
+				directory = input("Masukkan nama folder penyimpanan: ")
+				if check_directory(directory):
+					save(files,db,directory)
+				else:
+					save(files,db,get_directory(directory))
 			elif action == 'Help':						# F16
 				Help()
 			elif action == 'exit':						# F17
@@ -82,7 +86,11 @@ while 1:
 						db[3] = convert(db_gadget_borrow_history,Str=True)
 						db[4] = convert(db_gadget_return_history,Str=True)
 						db[5] = convert(db_user,Str=True)
-						save(files,db)
+						directory = input("Masukkan nama folder penyimpanan: ")
+						if check_directory(directory):
+							save(files,db,directory)
+						else:
+							save(files,db,get_directory(directory))
 						break
 					elif save_last_changes == 'N':
 						break
