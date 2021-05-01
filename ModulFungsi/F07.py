@@ -11,9 +11,9 @@ def modify_data(matriks, idx, col, value):
 
 def input_perubahan(jumlah):
 # I.S. : jumlah awal dari barang
-# F.S. : membuat variabel baru jumlah perubahan dan apakah jumlah akhir valid
+# F.S. : membuat variabel baru jumlah perubahan dan apakah valid
     jumlah_ubah = int(input("Masukkan Jumlah: "))
-    if jumlah + jumlah_ubah >= 0:
+    if int(jumlah) + jumlah_ubah >= 0:
         jumlah_tidak_valid = False
     else:
         jumlah_tidak_valid = True
@@ -39,7 +39,7 @@ def proses_perubahan(matriks, id_barang):
         if jumlah_tidak_valid == True:
             print("\n" + str(abs(jumlah_ubah)) + " " + nama_barang + "gagal dibuang karena stok kurang. Stok sekarang: " + str(jumlah_barang) + "(<" + str(abs(jumlah_ubah))+ ")")
         else:
-            jumlah_barang += jumlah_ubah
+            jumlah_barang = int(jumlah_barang) + jumlah_ubah
             modify_data(matriks, idx_barang, 3, jumlah_barang)
             if jumlah_ubah >= 0:
                 print("\n" + str(abs(jumlah_ubah)) + " " + nama_barang + " berhasil ditambahkan. Stok sekarang: " + str(jumlah_barang))
