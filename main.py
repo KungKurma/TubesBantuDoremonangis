@@ -1,3 +1,5 @@
+# Program Inventarisasi Barang-Barang Doremonangis
+
 # KAMUS
 # files = list nama file (csv)
 # db = matriks dari tiap isi file (csv)
@@ -38,7 +40,7 @@ while 1:
 			elif action == 'carirarity':
 				carirarity(db_gadget)
 			elif action == 'caritahun':
-				cariGadget(db_gadget)
+				cariTahun(db_gadget)
 			elif action == 'tambahitem' and user[5] == "Admin":
 				db_gadget, db_consumable = tambahItem(db_gadget, db_consumable)
 			elif action == 'hapusitem' and user[5] == "Admin":
