@@ -4,14 +4,30 @@
 # F.S. Item baru dimasukkan ke database gadget dan item bila input valid
 
 
-# KAMUS 
-# databaseG : list of list 
-# databaseC : list of list
-"""Nanti ganti data typenya"""
+# KAMUS
+# type type gadget : <ID        : string, 
+#                     Nama      : string,
+#                     Deskripsi : string,
+#                     Jumlah    : string,
+#                     Rarity    : string,
+#                     Tahun     : string>
+
+# type dbG : array of gadget
+
+# type type consumable : <ID        : string, 
+#                         Nama      : string,
+#                         Deskripsi : string,
+#                         Jumlah    : string,
+#                         Rarity    : string>
+
+# type dbC : array of consumable
+
+# databaseG : dbG 
+# databaseC : dbC
 
 # isGadget : boolean
 # ID, Nama, Deskripsi, Jumlah, Rarity, Tahun : string
-# Item : list
+# Item : (dbG/dbC)
 
 
 # FUNGSI DAN PROSEDUR
@@ -47,7 +63,7 @@ def sortInsert(Database, Entry):
 # panjang : integer
 # idNo    : integer
 # entryNo : integer
-# temp    : list of list
+# temp    : (dbG/dbC)
 
 # ALGORITMA
     temp    = [Database[0]]    # Memasukkan bagian awal ([id, nama, deskripsi, ...])
