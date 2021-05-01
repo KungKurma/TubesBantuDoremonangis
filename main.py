@@ -43,11 +43,11 @@ while 1:
 				db_gadget, db_consumable = tambahItem(db_gadget, db_consumable)
 			elif action == 'hapusitem' and user[5] == "Admin":
 				db_gadget, db_consumable = hapusItem(db_gadget, db_consumable)
-			elif action == 'ubahjumlah':	
+			elif action == 'ubahjumlah' and user[5] == "Admin":	
 				ubah_jumlah(db_gadget, db_consumable)
-			elif action == 'pinjam':
+			elif action == 'pinjam' and user[5] == "User":
 				meminjam_gadget(user[0],db_gadget_borrow_history, db_gadget)
-			elif action == 'kembalikan':
+			elif action == 'kembalikan' and user [5] == "User":
 				mengembalikan_gadget(user[0], db_gadget_borrow_history, db_gadget, db_gadget_return_history)
 			elif action == 'Help':
 				Help()
