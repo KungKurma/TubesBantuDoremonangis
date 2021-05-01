@@ -68,3 +68,4 @@ if args.folder == "KantongAjaib":
 	print("Selamat datang di Kantong Ajaib!")
 else:
 	print("Error: Folder not found.")
+	exit()
