@@ -34,7 +34,7 @@ def input_tanggal_valid():
     tgl_tidak_valid = True
     while(tgl_tidak_valid):
         idx = 0
-        tgl_pinjam  = input("Tanggal peminjaman: ")
+        tgl_pinjam  = input("Tanggal pengembalian: ")
         raw_tgl = ["" for i in range(3)]
         for i in tgl_pinjam:
             if i != "/" :
